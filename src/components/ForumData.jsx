@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { forumData } from "./Data";
 import ForumCard from "./ForumCard";
+import { useForum } from "./Context";
 
 function ForumData() {
-  const [forum, showForum] = useState([]);
-  useEffect(() => {
-    showForum(forumData);
-  }, []);
+  const { forumdata } = useForum();
 
   return (
     <div className="grid col-span-7  justify-items-center ">
       <div>Latest Posts</div>
       <div>
-        {forum?.posts?.map((post) => (
+        {forumdata?.map((post) => (
           <ForumCard post={post} comment={false} />
         ))}
       </div>

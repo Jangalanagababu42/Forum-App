@@ -8,9 +8,10 @@ import {
   faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useForum } from "./Context";
 function ForumCard({ post, comment }) {
   const [color, setColor] = useState("none");
-  const getVotes = post.upvotes - post.downvotes;
+  const { getVotes, upVoteHandler, downVoteHandler } = useForum();
   //   const [comments, showComments] = useState(false);
 
   return (
@@ -18,11 +19,23 @@ function ForumCard({ post, comment }) {
       <div className="flex flex-row  m-5 p-5 ">
         <div className="flex flex-col mr-2">
           <div>
-            <FontAwesomeIcon icon={faArrowUp} onClick={() => getVotes + 1} />
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              onClick={() => upVoteHandler(post.postId)}
+              style={{
+                color: post.upvotes > post.downvotes ? "blueviolet" : "none",
+              }}
+            />
           </div>
-          <div>{getVotes}</div>
+          <div>{getVotes(post.upvotes, post.downvotes)}</div>
           <div>
-            <FontAwesomeIcon icon={faArrowDown} onClick={() => getVotes - 1} />
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              onClick={() => downVoteHandler(post.postId)}
+              style={{
+                color: post.upvotes < post.downvotes ? "blueviolet" : "none",
+              }}
+            />
           </div>
         </div>
         <div className="flex flex-col ">

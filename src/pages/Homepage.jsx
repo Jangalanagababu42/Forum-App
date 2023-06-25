@@ -10,7 +10,7 @@ function Homepage() {
         <SideBar />
       </div>
       <ForumData />
-      <div className="grid col-span-2">
+      <div className="grid col-span-2 items-start">
         <SortBar />
       </div>
     </div>
